@@ -11,7 +11,7 @@ pipeline {
             steps {
                 script {
                     dir('terraform') {
-                        sh "terraform init -migrate-stat"
+                        sh "terraform init -reconfigure"
                         sh "terraform apply -auto-approve"
                     }
                 }
