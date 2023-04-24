@@ -2,10 +2,17 @@
 pipeline {
     agent any
     environment {
-        AWS_ACCESS_KEY_ID = credentials('AWS_ACCESS_KEY_ID')
-        AWS_SECRET_ACCESS_KEY = credentials('AWS_SECRET_ACCESS_KEY')
-        AWS_DEFAULT_REGION = "us-east-1"
+	    AWS_DEFAULT_REGION="us-east-1"
+	    THE_BUTLER_SAYS_SO=credentials('Cred-AWS')
     }
+    
+       stages {
+        stage('Checkout') {
+              steps {
+                  git url: 'https://github.com/oluseye00/jenkins-pipeline-deploy-to-eks.git'
+              }
+         }
+           
     stages {
         stage("Create an EKS Cluster") {
             steps {
